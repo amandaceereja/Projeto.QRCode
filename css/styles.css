@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Roboto;
+    font-family: Roboto; 
 }
 
 body {
@@ -17,10 +17,12 @@ body {
 .container {
     background-color: #fff;
     height: 260px;
-    width: 400px;
+    width: 90vw;
+    max-width: 400px;
     border-radius: 10px;
     padding: 20px;
-    transition: 0.2s;
+    transition: height 0.3s, box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0,0.1);
 }
 
 .container.active {
@@ -61,6 +63,11 @@ body {
     padding: 10px 15px;
 }
 
+#qr-form input:focus {
+    outline: 2px solid #086824;
+    box-shadow: 0 0 0 2px rgba(8, 104, 36, 0.3);
+}
+
 #qr-form button {
    background-color: #086824;
    color: #fff;
@@ -75,6 +82,16 @@ body {
     opacity: 1;
 }
 
+#qr-form button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(8, 104, 36, 0.4);
+}
+
+#qr-form button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
 /* QR Code */
 #qr-code {
     display: flex;
@@ -85,9 +102,43 @@ body {
     display: flex;
     justify-content: center;
     border-radius: 5px;
-    transition: 0.5s;
+    transition: opacity 0.5s ease;
+}
+
+#qr-code img {
+    max-width: 100%;
+    height: auto;
 }
 
 .container.active #qr-code {
     opacity: 1;
 }
+
+/* Accessibility utility -  Visually hides the element but keeps it available for screen readers */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+    .container {
+        max-width: 95vw;
+    }
+
+        #qr-header h1 {
+            font-size: 1.4rem;
+        }
+    
+        #qr-form input,
+        #qr-form button {
+            height: 50px;
+        }
+}
+
