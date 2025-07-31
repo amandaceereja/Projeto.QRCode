@@ -16,7 +16,7 @@ body {
 /* Container */
 .container {
     background-color: #fff;
-    height: 260px;
+    height: 280px;
     width: 90vw;
     max-width: 400px;
     border-radius: 10px;
@@ -26,7 +26,7 @@ body {
 }
 
 .container.active {
-    height: 500px;
+    height: auto;
 }
 
 /* Header */
@@ -95,12 +95,13 @@ body {
 /* QR Code */
 #qr-code {
     display: flex;
+    flex-direction: column;
     opacity: 0;
     border: 1px solid #ccc;
     padding: 30px 0;
     margin: 20px 15px;
-    display: flex;
     justify-content: center;
+    align-items: center;
     border-radius: 5px;
     transition: opacity 0.5s ease;
 }
@@ -142,3 +143,32 @@ body {
         }
 }
 
+#download-btn {
+    width: 90%;
+    max-width: 200px;
+    height: 45px;
+    border: none;
+    border-radius: 5px;
+    background-color: #086824;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    opacity: 0.9;
+    transition: 0.4s;
+    display: none;
+    margin: 15px auto 0 ;
+}
+
+#download-btn:hover {
+    opacity: 1;
+}
+
+#download-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(8, 114, 36, 0.4);
+}
+
+#download-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
