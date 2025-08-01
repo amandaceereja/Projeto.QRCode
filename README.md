@@ -1,22 +1,21 @@
 # Projeto.QRCode
 
-Descrição
-- Projeto simples para gerar e exibir QR Codes diretamente no navegador, utilizando HTML, CSS e JavaScript. Ideal para aprender manipulação de DOM e integração com bibliotecas de QR Code.
+// Description
+A simple project to generate and display QR Codes directly in the browser, using HTML, CSS, and JavaScript. Ideal for learning DOM manipulation and integration with QR Code libraries.
 
-Funcionalidades
-- Geração dinâmica de QR Codes a partir de texto inserido pelo usuário
-- Visualização instantânea do código gerado
-- Design responsivo e intuitivo
+// Features
+- Dynamic generation of QR Codes from user-entered text
+- Instant preview of the generated code
+- Responsive and intuitive design
 
-Tecnologias Utilizadas
+// Technologies Used
 - HTML5
 - CSS3
 - JavaScript (Vanilla JS)
 
-Link do site online
-- Acesse a versão publicada no GitHub Pages:
+// Live Site Link
+- Access the published version on GitHub Pages:  
 https://amandaceereja.github.io/Projeto.QRCode/
 
-Contato
-Amanda Cereja
+// Contact
 amandacereja027@outlook.com
