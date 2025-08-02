@@ -1,72 +1,84 @@
+// Elementos del DOM
+// ------------------------------
 const container = document.querySelector(".container");
 const qrCodeBtn = document.querySelector("#qr-form button");
 const qrCodeInput = document.querySelector("#qr-form input");
 const qrCodeDiv = document.getElementById("qr-code");
 const qrCodeImg = document.querySelector("#qr-code img");
 const statusMessage = document.querySelector("#status-message");
-const downloadBtn = document.querySelector("#download-btn");
+const downloadBtn = document.getElementById("download-btn");
 
+// Funciones principales
 function resetApp() {
     qrCodeInput.value = "";
-    qrCodeImg.src = "";
-    container.classList.remove("active");
     statusMessage.textContent = "";
-    qrCodeBtn.innerText = "Gerar QR Code";
+    qrCodeBtn.innerText = "Generar Código QR";
     downloadBtn.style.display = "none";
+
+    qrCodeDiv.style.transition = "none";
+    container.classList.remove("active");
+    void qrCodeDiv.offsetWidth;
+    qrCodeDiv.style.transition = "";
+    qrCodeImg.src = "";
 }
 
-// Eventos - Gerar QR Code 
 function generateQrCode() {
-    const qrCodeInputValue = qrCodeInput.value.trim();
+    const value = qrCodeInput.value.trim();
 
-    if (!qrCodeInputValue) {
-        statusMessage.textContent = "Por favor, digite para gerar o QR Code.";
+    if (!value) {
+        statusMessage.textContent = "Por favor, escribe algo para generar el código.";
         return;
     }
 
     qrCodeBtn.disabled = true;
-    qrCodeBtn.innerText = "Gerando código...";
+    qrCodeBtn.innerText = "Generando...";
     statusMessage.textContent = "";
-
     qrCodeImg.crossOrigin = "anonymous";
 
-    qrCodeImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${qrCodeInputValue}`;
+    qrCodeImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(value)}`;
 
     qrCodeImg.onload = () => {
         container.classList.add("active");
-        statusMessage.textContent = "Código criado!";
+        statusMessage.textContent = "¡Código creado!";
         qrCodeBtn.disabled = false;
         qrCodeBtn.innerText = "Criar novo QR Code";
-
+        
         downloadBtn.style.display = "block";
     };
 
-
     qrCodeImg.onerror = () => {
-        statusMessage.textContent = "Erro ao gerar o QR Code.";
+        statusMessage.textContent = "Error al generar el Código QR.";
         qrCodeBtn.disabled = false;
-        qrCodeBtn.innerText = "Gerar QR Code";
+        qrCodeBtn.innerText = "Generar Código QR";
     };
 }
 
-// Evento para ativar tecla enter 
+function animateDownloadBtn() {
+    downloadBtn.classList.add("pulse");
+    downloadBtn.addEventListener("animationend", () => {
+        downloadBtn.classList.remove("pulse");
+    }, { once: true });
+}
+
+
+// Eventos
+qrCodeBtn.addEventListener("click", () => {
+    if (qrCodeBtn.innerText === "Generar Código QR") {
+        generateQrCode();
+    } else {
+        resetApp();
+    }
+    qrCodeBtn.blur();
+});
+
 qrCodeInput.addEventListener("keydown", (e) => {
     if (e.code === "Enter") {
         generateQrCode();
     }
 });
 
-// Eventos - Limpar área do QR Code
-    qrCodeInput.addEventListener("keyup", () => {
-        if (!qrCodeInput.value.trim()) {
-        resetApp();
-        }   
-    });
-
-qrCodeBtn.addEventListener("click", () => {
-    if (qrCodeBtn.innerText === "Gerar QR Code") {
-        generateQrCode();
-    } else {
+qrCodeInput.addEventListener("keyup", () => {
+    if (!qrCodeInput.value.trim()) {
         resetApp();
     }
 });
@@ -88,3 +100,22 @@ qrCodeBtn.addEventListener("click", () => {
     link.download = "qr-code.jpg";
     link.click();
 });
+
+downloadBtn.addEventListener("click", () => {
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
+
+    canvas.width = qrCodeImg.naturalWidth;
+    canvas.height = qrCodeImg.naturalHeight;
+    context.drawImage(qrCodeImg, 0, 0);
+
+    const dataURL = canvas.toDataURL("image/jpeg", 0.9);
+    const link = document.createElement("a");
+    link.href = dataURL;
+    link.download = "codigo-qr.jpg";
+    link.click();
+
+    downloadBtn.blur();
+    animateDownloadBtn();
+});
+

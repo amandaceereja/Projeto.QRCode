@@ -2,7 +2,14 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Roboto; 
+    font-family: Roboto;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
 }
 
 body {
@@ -10,7 +17,7 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background-color: #34db7a;
+    background: linear-gradient(to top, #1e6a37, #28a03b, #34db7a);
 }
 
 /* Container */
@@ -20,9 +27,10 @@ body {
     width: 90vw;
     max-width: 400px;
     border-radius: 10px;
+    margin-bottom: 0;
     padding: 20px;
     transition: height 0.3s, box-shadow 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0,0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .container.active {
@@ -69,13 +77,13 @@ body {
 }
 
 #qr-form button {
-   background-color: #086824;
-   color: #fff;
-   font-size: 1.2rem;
-   margin-top: 20px; 
-   cursor: pointer;
-   opacity: 0.9;
-   transition: 0.4s;
+    background-color: #086824;
+    color: #fff;
+    font-size: 1.2rem;
+    margin-top: 20px;
+    cursor: pointer;
+    opacity: 0.9;
+    transition: 0.4s;
 }
 
 #qr-form button:hover {
@@ -123,25 +131,26 @@ body {
     padding: 0;
     margin: -1px;
     overflow: hidden;
-    clip: rect(0,0,0,0);
+    clip: rect(0, 0, 0, 0);
     border: 0;
 }
 
-/* Responsividade */
+/* Responsividad */
 @media (max-width: 480px) {
     .container {
         max-width: 95vw;
     }
 
-        #qr-header h1 {
-            font-size: 1.4rem;
-        }
-    
-        #qr-form input,
-        #qr-form button {
-            height: 50px;
-        }
+    #qr-header h1 {
+        font-size: 1.4rem;
+    }
+
+    #qr-form input,
+    #qr-form button {
+        height: 50px;
+    }
 }
+
 
 #download-btn {
     width: 90%;
@@ -159,6 +168,20 @@ body {
     margin: 15px auto 0 ;
 }
 
+#download-btn {
+    display: none;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    margin: 15px auto 0;
+    display: block;
+    transition: transform 0.1s ease;
+}
+
+#download-btn:active {
+    transform: scale(0.9);
+}
+
 #download-btn:hover {
     opacity: 1;
 }
@@ -166,9 +189,51 @@ body {
 #download-btn:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(8, 114, 36, 0.4);
+
+    box-shadow: none;
+    transition: transform 0.2s ease;
 }
 
 #download-btn:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+}
+
+#download-btn:hover svg,
+#download-btn:focus svg {
+    fill: #06581b;
+    outline: none;
+}
+
+button {
+    transition: box-shadow 0.3s ease, outline-color 0.3s ease;
+}
+
+button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+button:focus-visible {
+    box-shadow: 0 0 5px 3px rgba(8, 104, 36, 0.4);
+}
+
+.pulse {
+    animation: pulse-animation 0.3s ease forwards;
+}
+
+
+@keyframes pulse-animation {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+        ;
+    }
 }
